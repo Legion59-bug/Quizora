@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quizora</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-mode">
+
+<header class="app-header">
+  <div class="logo">
+    <div class="logo-btn"><i class="fa-solid fa-question"></i></div>
+    <span class="logo-text">Quizora</span>
+  </div>
+  <div class="header-actions">
+    <button id="about-btn" class="about-button" aria-label="About the Maker" onclick="openAboutModal()">
+      <i class="fa-solid fa-user-astronaut" id="about-icon"></i>
+      <span>About Me</span>
+    </button>
+    <button id="theme-toggle" class="icon-button" aria-label="Toggle dark mode" onclick="toggleTheme()">
+      <i class="fa-regular fa-moon" id="theme-icon"></i>
+    </button>
+  </div>
+</header>
+
+<main class="main-wrapper" role="main">
+  <div aria-live="polite" class="sr-only" id="a11y-announcer"></div>
+
+  <!-- Start Menu -->
+  <section id="start-screen" class="start-section" aria-labelledby="start-title">
+    <h1 id="start-title" class="main-title">Welcome to Quizora</h1>
+    <p class="main-subtitle">Test your knowledge and have fun!</p>
+    
+    <div class="divider">
+      <span class="line"></span>
+      <i class="fa-solid fa-trophy divider-icon"></i>
+      <span class="line"></span>
+    </div>
+
+    <h2 class="choose-title">Choose a Category</h2>
+
+    <div id="genres-container" class="cards-container" role="menu"></div>
+    
+    <div class="start-footer">
+      <i class="fa-regular fa-lightbulb"></i>
+      <p>Learn. Challenge. Improve.</p>
+    </div>
+  </section>
+
+  <!-- Quiz Interface -->
+  <section id="quiz-screen" class="quiz-box hidden" aria-labelledby="question">
+    <div class="quiz-header">
+       <div class="progress-bar-container" aria-hidden="true">
+         <div class="progress-bar" id="progress-bar"></div>
+       </div>
+       <div class="timer-badge" id="timer" aria-live="assertive">15s</div>
+    </div>
+    
+    <div class="quiz-content" id="quiz-content">
+      <h2 id="question" class="question-text">Question here</h2>
+      <div id="answers" class="options-group" role="group" aria-label="Select your answer"></div>
+    </div>
+    
+    <div class="quiz-footer" aria-live="polite">
+      <p id="progress-text">Question 1</p>
+    </div>
+  </section>
+
+  <!-- Results Interface -->
+  <section id="result-screen" class="quiz-box hidden" aria-labelledby="result-title">
+    <div class="result-icon">🎉</div>
+    <h2 id="result-title">Quiz Completed!</h2>
+
+    <h3 id="score-feedback" class="score-feedback"></h3>
+
+    <div class="score-card">
+      <p class="score-label">Your Score</p>
+      <p class="score-value"><span id="final-score">0</span> / <span id="total-questions">0</span></p>
+      <p class="high-score-label">High Score: <span id="high-score">0</span></p>
+    </div>
+    
+    <button id="restart-btn" class="primary-btn" onclick="location.reload()" aria-label="Restart the quiz and return to genre selection menu">Back to Menu</button>
+  </section>
+
+</main>
+
+<!-- About Me Modal -->
+<div id="about-modal" class="modal hidden" aria-hidden="true" role="dialog" aria-labelledby="about-modal-title">
+  <div class="modal-content">
+    <button class="close-modal-btn" aria-label="Close About Modal" onclick="closeAboutModal()">
+      <i class="fa-solid fa-times"></i>
+    </button>
+    <div class="about-header">
+      <div class="maker-avatar">
+        <!-- REPLACE "your-photo.jpg" WITH THE ACTUAL NAME OF YOUR PHOTO FILE -->
+        <img src="myname.jpg" alt="About the Maker" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Me&background=6366f1&color=fff&size=150';">
+      </div>
+      <h2 id="about-modal-title">About the Maker</h2>
+    </div>
+    <div class="about-body">
+      <p>Hello! Myself Samir Dhakal a passionate developer who loves building interactive and engaging web experiences. 
+        This Quizora was crafted to combine learning with fun, featuring clean code and a fully responsive design.</p>
+      
+      <div class="tech-stack">
+        <h3>Technologies Used</h3>
+        <div class="tech-tags">
+          <span class="tech-tag"><i class="fa-brands fa-html5"></i> HTML5</span>
+          <span class="tech-tag"><i class="fa-brands fa-css3-alt"></i> CSS3</span>
+          <span class="tech-tag"><i class="fa-brands fa-js"></i>Basic JS</span>
+        </div>
+      </div>
+      
+      <div class="social-links">
+        <!-- Replace href with your actual LinkedIn profile URL -->
+        <a href="https://www.linkedin.com/in/samir-dhakal-627920380/" target="_blank" rel="noopener noreferrer" class="social-btn linkedin" aria-label="LinkedIn">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+        <!-- Replace href with your actual GitHub profile URL -->
+        <a href="https://github.com/Legion59-bug" target="_blank" rel="noopener noreferrer" class="social-btn github" aria-label="GitHub">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </div>
+    </div>
+    <div class="about-footer">
+      <p>Created with <i class="fa-solid fa-heart" style="color: #ef4444;"></i> for the community.</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
